@@ -1,9 +1,11 @@
 import time
 from typing import Dict, List
+
 import requests
-from fake_headers import Headers
 from bs4 import BeautifulSoup
+from fake_headers import Headers
 from lxml import html
+
 
 def generate_headers(headers_setting: Dict) -> Dict:
     '''
@@ -25,7 +27,7 @@ def get_page_html(url: str, verify: bool = False, **kwargs) -> BeautifulSoup:
     return BeautifulSoup(requests.get(url, verify=verify, **kwargs).content, 'html.parser')
 
 
-def get_product_amount_page(url: str,headers: Dict) -> int:
+def get_product_amount_page(url: str, headers: Dict) -> int:
     '''
     Возвращает общее количество страниц для конкретного типа продукта
     | ---
@@ -73,9 +75,10 @@ def get_product_data(soup: BeautifulSoup) -> Dict[str, str]:
 
     _ = dict()
     _.update({'Наименование товара': soup.find("div", class_="op1-tt").text})
+
     # _.update({'Cost': soup.find('div', class_='desc-short-prices').find('a', class_='ib').text})
 
-    def get_loop_data(_: Dict) -> Dict[str,str]:
+    def get_loop_data(_: Dict) -> Dict[str, str]:
 
         for value in soup.find("table", class_="one-col").contents:
 

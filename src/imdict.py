@@ -1,6 +1,4 @@
-
 class imdict(dict):
-
     '''Неизменный словарь. Источник: оригинальная документация'''
 
     def __hash__(self):
@@ -11,8 +9,8 @@ class imdict(dict):
 
     __setitem__ = _immutable
     __delitem__ = _immutable
-    clear       = _immutable
-    update      = _immutable
-    setdefault  = _immutable
-    pop         = _immutable
-    popitem     = _immutable
+    clear = _immutable
+    update = _immutable
+    setdefault = _immutable
+    pop = _immutable
+    popitem = _immutable

@@ -1,17 +1,18 @@
-import warnings
 import json
+import warnings
 from itertools import chain
-from src.imdict import imdict
+
 from src.etl.extract import (collect_product_pages,
                              get_product_amount_page,
                              generate_headers,
                              collect_url_from_page,
                              get_product_data,
                              get_page_html)
+from src.imdict import imdict
 
 if __name__ == '__main__':
 
-    warnings.filterwarnings('ignore', U)
+    warnings.filterwarnings('ignore')
 
     data = imdict({'URL': 'https://www.e-katalog.ru/list/61/',
                    'DOMAIN': 'https://www.e-katalog.ru'})
@@ -22,7 +23,8 @@ if __name__ == '__main__':
 
     pages_urls = collect_product_pages(data['URL'], get_product_amount_page(data['URL'], generate_headers(headers)))
 
-    all_url_product = list(chain(*list(map(collect_url_from_page, pages_urls,[generate_headers(headers)]))))  # Распоковка всех списков
+    all_url_product = list(
+        chain(*list(map(collect_url_from_page, pages_urls, [generate_headers(headers)]))))  # Распоковка всех списков
 
     full_url_path_to_product = list(map(lambda x: data['DOMAIN'] + x, all_url_product))
 
